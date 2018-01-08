@@ -4,7 +4,13 @@ game.PlayScreen = me.ScreenObject.extend({
      */
     onResetEvent: function () {
         me.game.world.addChild(new me.ColorLayer("background", "#000000"), 0);
-        me.game.world.addChild(me.pool.pull("road"), 1);
+        var roads = [
+            me.game.world.addChild(me.pool.pull("road", 0), 1),
+            me.game.world.addChild(me.pool.pull("road", 1), 1),
+            me.game.world.addChild(me.pool.pull("road", 2), 1),
+            me.game.world.addChild(me.pool.pull("road", 3), 1)
+            ];
+        
         var player = me.pool.pull("player");
 
         me.game.world.addChild(player, 10);
