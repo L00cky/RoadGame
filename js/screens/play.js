@@ -7,8 +7,7 @@ game.PlayScreen = me.ScreenObject.extend({
         var roads = [
             me.game.world.addChild(me.pool.pull("road", 0), 1),
             me.game.world.addChild(me.pool.pull("road", 1), 1),
-            me.game.world.addChild(me.pool.pull("road", 2), 1),
-            me.game.world.addChild(me.pool.pull("road", 3), 1)
+            me.game.world.addChild(me.pool.pull("road", 2), 1)
             ];
         
         var player = me.pool.pull("player");

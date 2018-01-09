@@ -25,10 +25,11 @@
             this.pos.y += this.speed * time / 1000;
         }
 
-        if (this.pos.y <= (0 - this.image.height)) {
-            this.pos.y = (-1) * (4 * this.image.height);
-            console.log('moving up');
-        }
+        //if (this.pos.y >= -100) {
+        //    this.pos.y += 300;
+        //    this.pos.x += 50;
+        //    console.log('moving up', this.pos.x);
+        //}
 
         return true;
     }
