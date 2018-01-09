@@ -20,10 +20,10 @@ game.PlayScreen = me.ScreenObject.extend({
 
         me.game.world.addChild(player, 10);
 
-        me.input.bindKey(me.input.KEY.LEFT, "left");
-        me.input.bindKey(me.input.KEY.RIGHT, "right");
-        me.input.bindKey(me.input.KEY.A, "left");
-        me.input.bindKey(me.input.KEY.D, "right");
+        me.input.bindKey(me.input.KEY.LEFT, "left", true); 
+        me.input.bindKey(me.input.KEY.RIGHT, "right", true);
+        me.input.bindKey(me.input.KEY.A, "left", true);
+        me.input.bindKey(me.input.KEY.D, "right", true);
 
         me.input.bindKey(me.input.KEY.SPACE, "start");
 
