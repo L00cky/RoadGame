@@ -19,9 +19,6 @@ game.HUD.Container = me.Container.extend({
 
         // give a name
         this.name = "HUD";
-
-        // add our child score object at the top left corner
-        this.addChild(new game.HUD.ScoreItem(5, 5));
     }
 });
 
@@ -38,22 +35,14 @@ game.HUD.ScoreItem = me.Renderable.extend({
         // call the parent constructor
         // (size does not matter here)
         this._super(me.Renderable, 'init', [x, y, 10, 10]);
-
-        // local copy of the global score
-        this.score = -1;
     },
 
     /**
      * update function
      */
     update : function () {
-        // we don't do anything fancy here, so just
-        // return true if the score has been updated
-        if (this.score !== game.data.score) {
-            this.score = game.data.score;
-            return true;
-        }
-        return false;
+        
+        return true;
     },
 
     /**

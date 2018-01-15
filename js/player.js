@@ -1,7 +1,7 @@
 ﻿game.Player = me.Entity.extend({
     init: function () {
         var image = me.loader.getImage("car");
-        var middlePosition = (me.game.viewport.width / 2 - image.width / 2) + 18;
+        var middlePosition = (me.game.viewport.width / 2 - image.width / 2);
         var offset = 50;
 
         this._super(me.Entity, "init", [
@@ -16,16 +16,14 @@
         this.currentLane = 0;
     },
     update: function (time) {
-        this._super(me.Sprite, "update", [time]);
+        this._super(me.Entity, "update", [time]);
 
         if (me.input.isKeyPressed("left")) {
             this.currentLane -= 1;
-            console.log('current lane', this.currentLane);
         }
 
         if (me.input.isKeyPressed("right")) {
             this.currentLane += 1;
-            console.log('current lane', this.currentLane);
         }
 
         switch (this.currentLane) {

@@ -24,6 +24,7 @@ var game = {
         // add our player entity in the entity pool
         me.pool.register("player", game.Player);
         me.pool.register("road", game.Road);
+        me.pool.register("grass", game.Grass);
 
         // Start the game.
         me.state.change(me.state.PLAY);
