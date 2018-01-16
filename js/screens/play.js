@@ -6,50 +6,58 @@ game.PlayScreen = me.ScreenObject.extend({
         // Setting bg color to black
         me.game.world.addChild(new me.ColorLayer("background", "#000000"), 0);
 
+        var roadSettings = {
+            image: me.loader.getImage("road")
+        }
+
+        var grassSettings = {
+            image: me.loader.getImage("grass_0")
+        }
+
+        var playerSettings = {
+            image: me.loader.getImage("car")
+        }
+
+        var enemySettings = {
+            image: me.loader.getImage("truck_0")
+        }
+
+        // Variables for layers
+        var bgLayer = 1;
+        var roadLayer = 2;
+        var entitiesLayer = 10;
+        var hudLayer = 100;
+
         // Calculating middle of the screen
         var middleX = me.game.viewport.width / 2;
         var middleY = me.game.viewport.height / 2;
 
         // Adding roads
         var roads = [
-            me.game.world.addChild(me.pool.pull("road", middleX, middleY), 1),
-            me.game.world.addChild(me.pool.pull("road", middleX, middleY - 1 * 154), 1),
-            me.game.world.addChild(me.pool.pull("road", middleX, middleY - 2 * 154), 1),
-            me.game.world.addChild(me.pool.pull("road", middleX, middleY - 3 * 154), 1),
-            me.game.world.addChild(me.pool.pull("road", middleX, middleY - 4 * 154), 1)
+            //me.game.world.addChild(me.pool.pull("road", middleX, middleY, roadSettings), roadLayer),
+            //me.game.world.addChild(me.pool.pull("road", middleX, middleY - 1 * roadSettings.image.height, roadSettings), roadLayer),
+            //me.game.world.addChild(me.pool.pull("road", middleX, middleY - 2 * roadSettings.image.height, roadSettings), roadLayer),
+            //me.game.world.addChild(me.pool.pull("road", middleX, middleY - 3 * roadSettings.image.height, roadSettings), roadLayer),
+            //me.game.world.addChild(me.pool.pull("road", middleX, middleY - 4 * roadSettings.image.height, roadSettings), roadLayer)
         ];
 
-        // Calculating position of grass
-        var leftGrassBlockX = (((middleX - 169) + 82 / 2) - 0 * 82) + 5;
-        var rightGrassBlockX = (middleX + 169 - 82 / 2) - 5;
-
-        var grassBlockY = middleY - 154 / 2;
-
-        var grassSettings = {
-            image: me.loader.getImage("grass_0")
+        for (var i = 0; i < me.game.viewport.height / roadSettings.image.height + 1; i++) {
+            roads.push(me.game.world.addChild(me.pool.pull("road", middleX, i * roadSettings.image.height, roadSettings), bgLayer));
         }
 
-        var grassBG = [
-            me.game.world.addChild(me.pool.pull("grass", leftGrassBlockX, grassBlockY, grassSettings), 1),
-            me.game.world.addChild(me.pool.pull("grass", leftGrassBlockX - grassSettings.image.width, grassBlockY, grassSettings), 1),
-            me.game.world.addChild(me.pool.pull("grass", leftGrassBlockX - 2 * grassSettings.image.width, grassBlockY, grassSettings), 1),
+        var grassBG = []
 
-            me.game.world.addChild(me.pool.pull("grass", rightGrassBlockX, grassBlockY, grassSettings), 1),
-            me.game.world.addChild(me.pool.pull("grass", rightGrassBlockX + grassSettings.image.width, grassBlockY, grassSettings), 1),
-            me.game.world.addChild(me.pool.pull("grass", rightGrassBlockX + 2 * grassSettings.image.width, grassBlockY, grassSettings), 1),
+        for (var j = 0; j < me.game.viewport.height / grassSettings.image.height; j++) {
+            for (var i = 0; i < me.game.viewport.width / grassSettings.image.width; i++) {
+                grassBG.push(me.game.world.addChild(me.pool.pull("grass", i * grassSettings.image.width, j * grassSettings.image.height, grassSettings), bgLayer));
+            }
+        }
 
-            me.game.world.addChild(me.pool.pull("grass", leftGrassBlockX, grassBlockY - grassSettings.image.height, grassSettings), 1),
-            me.game.world.addChild(me.pool.pull("grass", leftGrassBlockX - grassSettings.image.width, grassBlockY - grassSettings.image.height, grassSettings), 1),
-            me.game.world.addChild(me.pool.pull("grass", leftGrassBlockX - 2 * grassSettings.image.width, grassBlockY - grassSettings.image.height, grassSettings), 1),
+        var player = me.pool.pull("player", (me.game.viewport.width / 2 - playerSettings.image.width / 2), me.game.viewport.height / 2 - playerSettings.image.height - 20, playerSettings);
+        var enemy = me.pool.pull("enemy", (me.game.viewport.width / 2 - enemySettings.image.width / 2), me.game.viewport.height / 2 - 300, enemySettings);
 
-            me.game.world.addChild(me.pool.pull("grass", rightGrassBlockX, grassBlockY - grassSettings.image.height, grassSettings), 1),
-            me.game.world.addChild(me.pool.pull("grass", rightGrassBlockX + grassSettings.image.width, grassBlockY - grassSettings.image.height, grassSettings), 1),
-            me.game.world.addChild(me.pool.pull("grass", rightGrassBlockX + 2 * grassSettings.image.width, grassBlockY - grassSettings.image.height, grassSettings), 1),
-        ]
-
-        var player = me.pool.pull("player");
-
-        me.game.world.addChild(player, 10);
+        me.game.world.addChild(player, entitiesLayer);
+        me.game.world.addChild(enemy, entitiesLayer);
 
         me.input.bindKey(me.input.KEY.LEFT, "left", true);
         me.input.bindKey(me.input.KEY.RIGHT, "right", true);
@@ -59,7 +67,7 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.bindKey(me.input.KEY.SPACE, "start");
 
         // Camera follows player
-        me.game.viewport.follow(player);
+        //me.game.viewport.follow(player);
     },
 
     /**

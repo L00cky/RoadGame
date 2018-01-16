@@ -1,10 +1,9 @@
 ﻿game.Road = me.Sprite.extend({
-    init: function (x, y) {
-        var image = me.loader.getImage("road");
+    init: function (x, y, settings) {
         this._super(me.Sprite, "init", [x, y, {
-            image: image,
-            width: image.width,
-            height: image.height
+            image: settings.image,
+            width: settings.image.width,
+            height: settings.image.height
         }]);
 
         this.canMove = false;

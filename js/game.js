@@ -1,10 +1,16 @@
 
 /* Game namespace */
 var game = {
+
+    data: {
+        score: 0,
+        life: 3
+    },
+
     // Run on page load.
-    "onload" : function () {
+    "onload": function () {
         // Initialize the video.
-        if (!me.video.init(640, 480, {wrapper : "screen", scale : "auto"})) {
+        if (!me.video.init(640, 480, { wrapper: "screen", scale: "auto" })) {
             alert("Your browser does not support HTML5 canvas.");
             return;
         }
@@ -18,13 +24,14 @@ var game = {
     },
 
     // Run on game resources loaded.
-    "loaded" : function () {
+    "loaded": function () {
         me.state.set(me.state.PLAY, new game.PlayScreen());
 
         // add our player entity in the entity pool
         me.pool.register("player", game.Player);
         me.pool.register("road", game.Road);
         me.pool.register("grass", game.Grass);
+        me.pool.register("enemy", game.Enemy);
 
         // Start the game.
         me.state.change(me.state.PLAY);

@@ -19,6 +19,8 @@ game.HUD.Container = me.Container.extend({
 
         // give a name
         this.name = "HUD";
+
+        this.addChild(new game.HUD.ScoreItem(-10, -10));
     }
 });
 
@@ -35,14 +37,27 @@ game.HUD.ScoreItem = me.Renderable.extend({
         // call the parent constructor
         // (size does not matter here)
         this._super(me.Renderable, 'init', [x, y, 10, 10]);
+
+        // create the font object
+        this.font = new me.BitmapFont(me.loader.getBinary('PressStart2P'), me.loader.getImage('PressStart2P'));
+
+        // font alignment to right, bottom
+        this.font.textAlign = "right";
+        this.font.textBaseline = "bottom";
+
+        // local copy of the global score
+        this.score = -1;
     },
 
     /**
      * update function
      */
     update : function () {
-        
-        return true;
+        if (this.score !== game.data.score) {
+            this.score = game.data.score;
+            return true;
+        }
+        return false;
     },
 
     /**
@@ -50,6 +65,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
      */
     draw : function (context) {
         // draw it baby !
+        // this.pos.x, this.pos.y are the relative position from the screen right bottom
+        this.font.draw(this.renderer, game.data.score, me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y);
     }
 
 });
