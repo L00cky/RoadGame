@@ -32,16 +32,17 @@ game.PlayScreen = me.ScreenObject.extend({
         var middleX = me.game.viewport.width / 2;
         var middleY = me.game.viewport.height / 2;
 
-        // Adding roads
-        var roads = [
-            //me.game.world.addChild(me.pool.pull("road", middleX, middleY, roadSettings), roadLayer),
-            //me.game.world.addChild(me.pool.pull("road", middleX, middleY - 1 * roadSettings.image.height, roadSettings), roadLayer),
-            //me.game.world.addChild(me.pool.pull("road", middleX, middleY - 2 * roadSettings.image.height, roadSettings), roadLayer),
-            //me.game.world.addChild(me.pool.pull("road", middleX, middleY - 3 * roadSettings.image.height, roadSettings), roadLayer),
-            //me.game.world.addChild(me.pool.pull("road", middleX, middleY - 4 * roadSettings.image.height, roadSettings), roadLayer)
-        ];
+        var obstacles = [];
 
-        for (var i = 0; i < me.game.viewport.height / roadSettings.image.height + 1; i++) {
+        for (var i = 0; i < 1; i++) {
+            var x = i * 50;
+            obstacles.push(me.game.world.addChild(me.pool.pull("enemy", i * 50, me.game.viewport.height / 2 - 300, enemySettings)));
+        }
+
+        // Adding roads
+        var roads = [];
+
+        for (var i = -1; i < me.game.viewport.height / roadSettings.image.height + 2; i++) {
             roads.push(me.game.world.addChild(me.pool.pull("road", middleX, i * roadSettings.image.height, roadSettings), bgLayer));
         }
 
@@ -53,11 +54,13 @@ game.PlayScreen = me.ScreenObject.extend({
             }
         }
 
-        var player = me.pool.pull("player", (me.game.viewport.width / 2 - playerSettings.image.width / 2), me.game.viewport.height / 2 - playerSettings.image.height - 20, playerSettings);
-        var enemy = me.pool.pull("enemy", (me.game.viewport.width / 2 - enemySettings.image.width / 2), me.game.viewport.height / 2 - 300, enemySettings);
+        var player = me.pool.pull("player", (me.game.viewport.width / 2 - playerSettings.image.width / 2), me.game.viewport.height / 2 + 50, playerSettings);
+        var enemy = me.pool.pull("enemy", (me.game.viewport.width / 2 - enemySettings.image.width / 2), me.game.viewport.height / 2 - 50, enemySettings);
+        var enemy2 = me.pool.pull("enemy", (me.game.viewport.width / 2 - enemySettings.image.width / 2), me.game.viewport.height / 2 - 300, enemySettings);
 
         me.game.world.addChild(player, entitiesLayer);
-        me.game.world.addChild(enemy, entitiesLayer);
+        //me.game.world.addChild(enemy, entitiesLayer);
+        //me.game.world.addChild(enemy2, entitiesLayer);
 
         me.input.bindKey(me.input.KEY.LEFT, "left", true);
         me.input.bindKey(me.input.KEY.RIGHT, "right", true);

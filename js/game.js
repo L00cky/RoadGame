@@ -4,7 +4,8 @@ var game = {
 
     data: {
         score: 0,
-        life: 3
+        life: 3,
+        maxObstacles: 10
     },
 
     // Run on page load.

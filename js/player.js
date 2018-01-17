@@ -13,6 +13,7 @@
         ]);
 
         this.body.collisionType = me.collision.types.PLAYER_OBJECT;
+        this.body.setCollisionMask(me.collision.types.ENEMY_OBJECT);
 
         this.leftLane = middlePosition - offset;
         this.rightLane = middlePosition + offset;
@@ -55,18 +56,23 @@
         }
 
         this.pos.x = this.pos.x.clamp(this.leftPosition, this.rightPosition);
-
-        //this.body.update();
+        
         me.collision.check(this);
+        
 
         return true;
     },
     onCollision: function (res, other) {
         if (other.body.collisionType === me.collision.types.ENEMY_OBJECT) {
             console.log('collided');
+            var body = this.body;
+            body.setCollisionMask(me.collision.types.WORLD_SHAPE);
             me.game.world.removeChild(other);
-            this.renderable.flicker(2000);
+            this.renderable.flicker(2000, function () {
+                body.setCollisionMask(me.collision.types.ENEMY_OBJECT);
+            }.bind(this));
             game.data.life--;
+            console.log(game.data.life);
             return false;
         }
     }

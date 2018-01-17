@@ -53,5 +53,15 @@ game.resources = [
         "name": "truck_0",
         "type": "image",
         "src": "data/img/truck_0.png"
+    },
+    {
+        "name": "pressStart2P",
+        "type": "image",
+        "src": "data/fnt/PressStart2P.png"
+    },
+    {
+        "name": "pressStart2P",
+        "type": "binary",
+        "src": "data/fnt/PressStart2P.fnt"
     }
 ];
