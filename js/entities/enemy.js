@@ -1,7 +1,9 @@
 ﻿game.Enemy = me.Entity.extend({
     init: function (x, y, settings) {
         var offset = 50;
-        var randY = me.game.viewport.height / 2 - (this.getRandomInt(350, 450));
+        var minY = 350;
+        var maxY = 2000;
+        var randY = me.game.viewport.height / 2 - (this.getRandomInt(minY, maxY));
         var middlePosition = (me.game.viewport.width / 2 - settings.image.width / 2);
         this._super(me.Entity, "init", [
             x,
@@ -20,7 +22,7 @@
         this.leftLane = middlePosition - offset;
         this.rightLane = middlePosition + offset;
         this.middleLane = middlePosition;
-        this.currentLane = Math.floor(Math.random() * 2);
+        this.currentLane = Math.floor(Math.random() * 3);
         console.log(this.currentLane, randY);
         this.alwaysUpdate = true;
         this.speed = 200;

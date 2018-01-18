@@ -34,7 +34,7 @@ game.PlayScreen = me.ScreenObject.extend({
 
         var obstacles = [];
 
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < game.data.maxObstacles; i++) {
             obstacles.push(me.game.world.addChild(me.pool.pull("enemy", 0, me.game.viewport.height / 2 - 450, enemySettings)));
         }
 
