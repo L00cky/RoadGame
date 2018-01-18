@@ -1,10 +1,11 @@
 ﻿game.Enemy = me.Entity.extend({
     init: function (x, y, settings) {
         var offset = 50;
+        var randY = me.game.viewport.height / 2 - (this.getRandomInt(350, 450));
         var middlePosition = (me.game.viewport.width / 2 - settings.image.width / 2);
         this._super(me.Entity, "init", [
             x,
-            y,
+            randY,
             {
                 image: settings.image,
                 width: settings.image.width,
@@ -19,7 +20,8 @@
         this.leftLane = middlePosition - offset;
         this.rightLane = middlePosition + offset;
         this.middleLane = middlePosition;
-        this.currentLane = 1;
+        this.currentLane = Math.floor(Math.random() * 2);
+        console.log(this.currentLane, randY);
         this.alwaysUpdate = true;
         this.speed = 200;
     },
@@ -49,5 +51,10 @@
         }
 
         return true;
+    },
+    getRandomInt: function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
 });

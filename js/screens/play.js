@@ -34,9 +34,8 @@ game.PlayScreen = me.ScreenObject.extend({
 
         var obstacles = [];
 
-        for (var i = 0; i < 1; i++) {
-            var x = i * 50;
-            obstacles.push(me.game.world.addChild(me.pool.pull("enemy", i * 50, me.game.viewport.height / 2 - 300, enemySettings)));
+        for (var i = 0; i < 4; i++) {
+            obstacles.push(me.game.world.addChild(me.pool.pull("enemy", 0, me.game.viewport.height / 2 - 450, enemySettings)));
         }
 
         // Adding roads
@@ -55,8 +54,8 @@ game.PlayScreen = me.ScreenObject.extend({
         }
 
         var player = me.pool.pull("player", (me.game.viewport.width / 2 - playerSettings.image.width / 2), me.game.viewport.height / 2 + 50, playerSettings);
-        var enemy = me.pool.pull("enemy", (me.game.viewport.width / 2 - enemySettings.image.width / 2), me.game.viewport.height / 2 - 50, enemySettings);
-        var enemy2 = me.pool.pull("enemy", (me.game.viewport.width / 2 - enemySettings.image.width / 2), me.game.viewport.height / 2 - 300, enemySettings);
+        //var enemy = me.pool.pull("enemy", (me.game.viewport.width / 2 - enemySettings.image.width / 2), me.game.viewport.height / 2 - 50, enemySettings);
+        //var enemy2 = me.pool.pull("enemy", (me.game.viewport.width / 2 - enemySettings.image.width / 2), me.game.viewport.height / 2 - 300, enemySettings);
 
         me.game.world.addChild(player, entitiesLayer);
         //me.game.world.addChild(enemy, entitiesLayer);
