@@ -66,8 +66,9 @@
         if (other.body.collisionType === me.collision.types.ENEMY_OBJECT) {
             console.log('collided');
             var body = this.body;
-            body.setCollisionMask(me.collision.types.WORLD_SHAPE);
+            body.setCollisionMask();
             me.game.world.removeChild(other);
+            game.data.currentObstacles--;
             this.renderable.flicker(2000, function () {
                 body.setCollisionMask(me.collision.types.ENEMY_OBJECT);
             }.bind(this));

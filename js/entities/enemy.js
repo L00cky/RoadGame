@@ -3,7 +3,7 @@
         var offset = 50;
         var minY = 350;
         var maxY = 2000;
-        var randY = me.game.viewport.height / 2 - (this.getRandomInt(minY, maxY));
+        var randY = y - (this.getRandomInt(minY, maxY));
         var middlePosition = (me.game.viewport.width / 2 - settings.image.width / 2);
         this._super(me.Entity, "init", [
             x,
@@ -23,7 +23,7 @@
         this.rightLane = middlePosition + offset;
         this.middleLane = middlePosition;
         this.currentLane = Math.floor(Math.random() * 3);
-        console.log(this.currentLane, randY);
+        console.log('Spawning obstacle car', this.currentLane, randY);
         this.alwaysUpdate = true;
         this.speed = 200;
     },
