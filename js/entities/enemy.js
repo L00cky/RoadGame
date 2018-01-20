@@ -1,24 +1,29 @@
 ﻿game.Enemy = me.Entity.extend({
     init: function (x, y, settings) {
+        var images = ["truck_0", "truck_1"]
+        var randomImage = images[this.getRandomInt(0, images.length)];
+
         var offset = 50;
         var minY = 350;
-        var maxY = 2000;
+        var maxY = 400;
         var randY = y - (this.getRandomInt(minY, maxY));
         var middlePosition = (me.game.viewport.width / 2 - settings.image.width / 2);
         this._super(me.Entity, "init", [
             x,
             randY,
             {
-                image: settings.image,
+                image: randomImage,
                 width: settings.image.width,
                 height: settings.image.height
             }
         ]);
 
-        this.body.collisionType = me.collision.types.ENEMY_OBJECT;
-        this.body.setVelocity(0, 200);
+        this.name = 'obstacle_car';
 
-        this.canMove = false;
+        this.body.collisionType = me.collision.types.ENEMY_OBJECT;
+        //this.body.setVelocity(0, 200);
+        this.body.gravity = 0;
+
         this.leftLane = middlePosition - offset;
         this.rightLane = middlePosition + offset;
         this.middleLane = middlePosition;
@@ -30,13 +35,7 @@
     update: function (time) {
         this._super(me.Entity, "update", [time]);
 
-        if (me.input.isKeyPressed("start")) {
-            if (!this.canMove) {
-                this.canMove = true;
-            }
-        }
-
-        if (this.canMove) {
+        if (game.data.gameStarted) {
             this.pos.y += this.speed * time / 1000;
         }
 
@@ -52,6 +51,12 @@
                 break;
         }
 
+        if (!this.inViewport) {
+            //game.data.currentObstacles--;
+            this.alive = false;
+        }
+
+        this.body.update(time);
         return true;
     },
     getRandomInt: function getRandomInt(min, max) {

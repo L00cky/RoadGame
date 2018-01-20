@@ -10,6 +10,10 @@ game.PlayScreen = me.ScreenObject.extend({
         game.levelManager.createLevel(game.data.maxObstacles);
         me.game.world.addChild(game.levelManager);
 
+        // add our HUD to the game world
+        this.HUD = new game.HUD.Container();
+        me.game.world.addChild(this.HUD);
+
         me.input.bindKey(me.input.KEY.LEFT, "left", true);
         me.input.bindKey(me.input.KEY.RIGHT, "right", true);
         me.input.bindKey(me.input.KEY.A, "left", true);

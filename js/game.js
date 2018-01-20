@@ -6,7 +6,8 @@ var game = {
         score: 0,
         life: 3,
         maxObstacles: 3,
-        currentObstacles: 0
+        currentObstacles: 0,
+        gameStarted: false
     },
 
     // Run on page load.

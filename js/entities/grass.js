@@ -1,24 +1,19 @@
 ﻿game.Grass = me.Sprite.extend({
     init: function (x, y, settings) {
+        var images = ["grass_0", "grass_1", "grass_2"] //, "grass_3", "grass_4", "grass_5", "grass_6", "grass_7"
+        var randomImage = images[this.getRandomInt(0, images.length)];
         this._super(me.Sprite, "init", [x, y,
             {
-                image: settings.image
+                image: randomImage
             }]);
 
-        this.canMove = false;
         this.speed = 300;
         this.alwaysUpdate = true;
     },
     update: function (time) {
         this._super(me.Sprite, "update", [time]);
 
-        if (me.input.isKeyPressed("start")) {
-            if (!this.canMove) {
-                this.canMove = true;
-            }
-        }
-
-        if (this.canMove) {
+        if (game.data.gameStarted) {
             this.pos.y += this.speed * time / 1000;
         }
 
@@ -27,5 +22,10 @@
         }
 
         return true;
+    },
+    getRandomInt: function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
 });

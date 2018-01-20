@@ -50,8 +50,28 @@ game.resources = [
         "src": "data/img/road.png"
     },
     {
+        "name": "source_texture",
+        "type": "image",
+        "src": "data/img/source_texture.png"
+    },
+    {
         "name": "truck_0",
         "type": "image",
         "src": "data/img/truck_0.png"
+    },
+    {
+        "name": "truck_1",
+        "type": "image",
+        "src": "data/img/truck_1.png"
+    },
+    {
+        "name": "PressStart2P",
+        "type": "image",
+        "src": "data/fnt/PressStart2P.png"
+    },
+    {
+        "name": "PressStart2P",
+        "type": "binary",
+        "src": "data/fnt/PressStart2P.fnt"
     }
 ];

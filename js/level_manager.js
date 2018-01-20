@@ -1,6 +1,9 @@
 ﻿game.LevelManager = me.Container.extend({
     init: function () {
 
+        // TODO:
+        // 
+
         this.enemySettings = {
             image: me.loader.getImage("truck_0")
         }
@@ -21,14 +24,13 @@
 
         var offset = 50;
         var minY = 350;
-        var maxY = 2000;
+        var maxY = 400;
         var randY = me.game.viewport.height / 2 - (this.getRandomInt(minY, maxY));
         var middlePosition = (me.game.viewport.width / 2 - this.enemySettings.image.width / 2);
 
         var obstacleCollisionType = me.collision.types.ENEMY_OBJECT;
         var obstacleCarsYVelocity = 200;
-
-        var canMove = false;
+        
         var leftLane = middlePosition - offset;
         var rightLane = middlePosition + offset;
         this.middleLane = middlePosition;
@@ -64,7 +66,7 @@
 
 
     createLevel: function (maxCars) {
-        me.game.world.addChild(this.player, this.entitiesLayer);     
+        this.addChild(this.player, this.entitiesLayer);
 
         for (var i = game.data.currentObstacles; i < maxCars; i++) {
             this.spawnObstacleCar();
@@ -72,12 +74,12 @@
 
         // Adding roads
         for (var i = -1; i < me.game.viewport.height / this.roadSettings.image.height + 2; i++) {
-            this.roads.push(me.game.world.addChild(me.pool.pull("road", this.middleX, i * this.roadSettings.image.height, this.roadSettings), this.roadLayer));
+            this.roads.push(this.addChild(me.pool.pull("road", this.middleX, i * this.roadSettings.image.height, this.roadSettings), this.roadLayer));
         }
 
         for (var j = 0; j < me.game.viewport.height / this.grassSettings.image.height; j++) {
             for (var i = 0; i < me.game.viewport.width / this.grassSettings.image.width; i++) {
-                this.grassBG.push(me.game.world.addChild(me.pool.pull("grass", i * this.grassSettings.image.width, j * this.grassSettings.image.height, this.grassSettings), this.bgLayer));
+                this.grassBG.push(this.addChild(me.pool.pull("grass", i * this.grassSettings.image.width, j * this.grassSettings.image.height, this.grassSettings), this.bgLayer));
             }
         }
 
@@ -98,8 +100,7 @@
         return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     },
     spawnObstacleCar: function () {
-        this.obstacles.push(me.game.world.addChild(me.pool.pull("enemy", 0, this.player.pos.y - 450, this.enemySettings), this.entitiesLayer));
-        console.log('players y', this.player.pos.y);
+        this.obstacles.push(this.addChild(me.pool.pull("enemy", 0, this.player.pos.y, this.enemySettings), this.entitiesLayer));
         game.data.currentObstacles++;
     }
 });

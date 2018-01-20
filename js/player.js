@@ -11,7 +11,7 @@
                 height: settings.image.height
             }
         ]);
-
+        this.name = 'player';
         this.body.collisionType = me.collision.types.PLAYER_OBJECT;
         this.body.setCollisionMask(me.collision.types.ENEMY_OBJECT);
 
@@ -19,7 +19,6 @@
         this.rightLane = middlePosition + offset;
         this.middleLane = x;
         this.currentLane = 1;
-        this.canMove = false;
 
         this.minLane = 0;
         this.maxLane = 2;
@@ -28,12 +27,12 @@
         this._super(me.Entity, "update", [time]);
 
         if (me.input.isKeyPressed("start")) {
-            if (!this.canMove) {
-                this.canMove = true;
+            if (!game.data.gameStarted) {
+                game.data.gameStarted = true;
             }
         }
 
-        if (this.canMove) {
+        if (game.data.gameStarted) {
             if (me.input.isKeyPressed("left") && this.currentLane > this.minLane) {
                 this.currentLane -= 1;
             }
@@ -58,16 +57,19 @@
         this.pos.x = this.pos.x.clamp(this.leftPosition, this.rightPosition);
         
         me.collision.check(this);
-        
 
         return true;
     },
     onCollision: function (res, other) {
         if (other.body.collisionType === me.collision.types.ENEMY_OBJECT) {
-            console.log('collided');
+            console.log('Collided with', other);
+
+            var container = this.ancestor;
             var body = this.body;
+
             body.setCollisionMask();
-            me.game.world.removeChild(other);
+            container.removeChildNow(other);
+            console.log('container', container);
             game.data.currentObstacles--;
             this.renderable.flicker(2000, function () {
                 body.setCollisionMask(me.collision.types.ENEMY_OBJECT);
