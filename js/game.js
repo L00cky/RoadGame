@@ -7,7 +7,9 @@ var game = {
         life: 3,
         maxObstacles: 3,
         currentObstacles: 0,
-        gameStarted: false
+        gameStarted: false,
+        gameOver: false,
+        scrollingSpeed: 300
     },
 
     // Run on page load.
@@ -35,6 +37,7 @@ var game = {
         me.pool.register("road", game.Road);
         me.pool.register("grass", game.Grass);
         me.pool.register("enemy", game.Enemy);
+        me.pool.register("obstacle", game.Obstacle);
 
         // Start the game.
         me.state.change(me.state.PLAY);

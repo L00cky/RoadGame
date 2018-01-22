@@ -7,7 +7,7 @@ game.PlayScreen = me.ScreenObject.extend({
         me.game.world.addChild(new me.ColorLayer("background", "#000000"), 0);
 
         game.levelManager = new game.LevelManager();
-        game.levelManager.createLevel(game.data.maxObstacles);
+        game.levelManager.createLevel();
         me.game.world.addChild(game.levelManager);
 
         // add our HUD to the game world
@@ -17,7 +17,8 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.bindKey(me.input.KEY.LEFT, "left", true);
         me.input.bindKey(me.input.KEY.RIGHT, "right", true);
         me.input.bindKey(me.input.KEY.A, "left", true);
-        me.input.bindKey(me.input.KEY.D, "right", true);
+        me.input.bindKey(me.input.KEY.D, "right", true)
+        me.input.bindKey(me.input.KEY.HOME, "start");
 
         me.input.bindKey(me.input.KEY.SPACE, "start");
     },

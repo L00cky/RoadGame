@@ -1,15 +1,15 @@
-﻿game.Enemy = me.Entity.extend({
+﻿game.Obstacle = me.Entity.extend({
     init: function (x, y, settings) {
-        var images = ["truck_0", "truck_1"]
+        var images = ["obstacle_0", "obstacle_1"]
         var randomImage = me.loader.getImage(images[this.getRandomInt(0, images.length)]);
 
         var offset = 50;
         var minY = 350;
         var maxY = 1000;
         var randY = y - (this.getRandomInt(minY, maxY));
-        var middlePosition = (me.game.viewport.width / 2 - settings.image.width / 2);
+        var middlePosition = (me.game.viewport.width / 2 - randomImage.width / 2);
         this._super(me.Entity, "init", [
-            x,
+            0,
             randY,
             {
                 image: randomImage,
@@ -18,7 +18,7 @@
             }
         ]);
 
-        this.name = 'obstacle_car';
+        this.name = 'obstacle';
 
         this.body.collisionType = me.collision.types.ENEMY_OBJECT;
         this.body.gravity = 0;
@@ -28,13 +28,12 @@
         this.middleLane = middlePosition;
         this.currentLane = Math.floor(Math.random() * 3);
         this.alwaysUpdate = true;
-        this.speed = 200;
     },
     update: function (time) {
         this._super(me.Entity, "update", [time]);
 
         if (game.data.gameStarted) {
-            this.pos.y += this.speed * time / 1000;
+            this.pos.y += game.data.scrollingSpeed * time / 1000;
         }
 
         switch (this.currentLane) {

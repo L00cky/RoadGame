@@ -45,6 +45,16 @@ game.resources = [
         "src": "data/img/grass_7.png"
     },
     {
+        "name": "obstacle_0",
+        "type": "image",
+        "src": "data/img/obstacle_0.png"
+    },
+    {
+        "name": "obstacle_1",
+        "type": "image",
+        "src": "data/img/obstacle_1.png"
+    },
+    {
         "name": "road",
         "type": "image",
         "src": "data/img/road.png"

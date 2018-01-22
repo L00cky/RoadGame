@@ -69,8 +69,9 @@
 
             body.setCollisionMask();
             container.removeChildNow(other);
-            console.log('container', container);
+            var index = container.obstacles.indexOf(other);            
             game.data.currentObstacles--;
+            
             this.renderable.flicker(2000, function () {
                 body.setCollisionMask(me.collision.types.ENEMY_OBJECT);
             }.bind(this));
