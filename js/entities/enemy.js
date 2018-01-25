@@ -22,6 +22,7 @@
 
         this.body.collisionType = me.collision.types.ENEMY_OBJECT;
         this.body.gravity = 0;
+        this.body.setVelocity(0, 0);
 
         this.leftLane = middlePosition - offset;
         this.rightLane = middlePosition + offset;

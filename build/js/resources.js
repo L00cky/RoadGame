@@ -1,5 +1,10 @@
 game.resources = [
     {
+        "name": "car_crashed",
+        "type": "image",
+        "src": "data/img/car_crashed.png"
+    },
+    {
         "name": "car",
         "type": "image",
         "src": "data/img/car.png"
@@ -43,6 +48,11 @@ game.resources = [
         "name": "grass_7",
         "type": "image",
         "src": "data/img/grass_7.png"
+    },
+    {
+        "name": "health",
+        "type": "image",
+        "src": "data/img/health.png"
     },
     {
         "name": "obstacle_0",

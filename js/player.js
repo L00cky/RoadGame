@@ -22,6 +22,8 @@
 
         this.minLane = 0;
         this.maxLane = 2;
+
+        this.settings = settings;
     },
     update: function (time) {
         this._super(me.Entity, "update", [time]);
@@ -40,6 +42,10 @@
             if (me.input.isKeyPressed("right") && this.currentLane < this.maxLane) {
                 this.currentLane += 1;
             }
+        }
+
+        if (game.data.life === 0) {
+            this.image = this.settings.crashedImage;
         }
 
         switch (this.currentLane) {
