@@ -3,7 +3,7 @@ game.HUD = game.HUD || {};
 
 game.HUD.Container = me.Container.extend({
 
-    init: function() {
+    init: function () {
         this._super(me.Container, 'init');
         this.isPersistent = true;
         this.floating = true;
@@ -16,6 +16,13 @@ game.HUD.Container = me.Container.extend({
         for (var i = 0; i < this.hp; i++) {
             this.healthArray.push(this.addChild(new game.HUD.Health(i * 25, 10)));
         }
+    },
+    removeHealthPoint: function () {
+        var hpToRemove = this.healthArray[this.healthArray.length - 1];
+        hpToRemove.alpha = 0;
+        this.healthArray.splice(this.healthArray.length - 1, 1);
+        this.removeChildNow(hpToRemove, false);
+        
     }
 });
 
@@ -25,13 +32,19 @@ game.HUD.Health = me.Sprite.extend({
         this._super(me.Sprite, 'init', [x, y, {
             image: image
         }]);
-
         this.anchorPoint = new me.Vector2d(0, 0);
-    },
+    }
+    ,
     update: function () {
-        if (this.hp != game.data.life) {
-            this.hp = game.data.life;
+        var container = this.ancestor;
+        if (container.hp != game.data.life) {
+            container.hp = game.data.life;
+            container.removeHealthPoint();
+
+            return true;
         }
+
+        return false;
     }
 })
 

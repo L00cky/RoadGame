@@ -5,6 +5,11 @@ game.resources = [
         "src": "data/img/car_crashed.png"
     },
     {
+        "name": "car_spritesheet",
+        "type": "image",
+        "src": "data/img/car_spritesheet.png"
+    },
+    {
         "name": "car",
         "type": "image",
         "src": "data/img/car.png"

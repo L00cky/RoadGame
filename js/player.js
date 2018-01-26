@@ -1,19 +1,27 @@
 ﻿game.Player = me.Entity.extend({
     init: function (x, y, settings) {
         var offset = 50;
-        var middlePosition = (me.game.viewport.width / 2 - settings.image.width / 2);
+        var middlePosition = (me.game.viewport.width / 2 - settings.image.width / 4);
         this._super(me.Entity, "init", [
             x,
             y,
             {
                 image: settings.image,
-                width: settings.image.width,
+                width: settings.image.width / 2,
                 height: settings.image.height
             }
         ]);
         this.name = 'player';
         this.body.collisionType = me.collision.types.PLAYER_OBJECT;
         this.body.setCollisionMask(me.collision.types.ENEMY_OBJECT);
+        this.body.gravity = 0;
+        this.body.setVelocity(0, 0);
+
+        this.renderable.addAnimation('alive', [0]);
+        this.renderable.addAnimation('crashed', [1]);
+        this.renderable.setCurrentAnimation('alive');
+
+        this.health = game.data.life;
 
         this.leftLane = middlePosition - offset;
         this.rightLane = middlePosition + offset;
@@ -44,8 +52,8 @@
             }
         }
 
-        if (game.data.life === 0) {
-            this.image = this.settings.crashedImage;
+        if (game.data.life <= 0) {
+            this.renderable.setCurrentAnimation('crashed');
         }
 
         switch (this.currentLane) {
@@ -68,13 +76,12 @@
     },
     onCollision: function (res, other) {
         if (other.body.collisionType === me.collision.types.ENEMY_OBJECT) {
-            console.log('Collided with', other);
-
             var container = this.ancestor;
             var body = this.body;
 
             body.setCollisionMask();
             container.removeChildNow(other);
+
             var index = container.obstacles.indexOf(other);            
             game.data.currentObstacles--;
             

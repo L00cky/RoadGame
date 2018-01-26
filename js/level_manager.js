@@ -14,8 +14,7 @@
         }
 
         this.playerSettings = {
-            image: me.loader.getImage("car"),
-            crashedImage: me.loader.getImage("car_crashed")
+            image: me.loader.getImage("car_spritesheet")
         }
 
         this.obstacleSettings = {
@@ -26,13 +25,13 @@
         this.middleX = me.game.viewport.width / 2;
         this.middleY = me.game.viewport.height / 2;
 
-        this.player = me.pool.pull("player", (me.game.viewport.width / 2 - this.playerSettings.image.width / 2), me.game.viewport.height / 2 + 50, this.playerSettings);
+        this.player = me.pool.pull("player", (me.game.viewport.width / 2 - this.playerSettings.image.width / 4), me.game.viewport.height / 2 + 50, this.playerSettings);
 
         var offset = 50;
         var minY = 350;
         var maxY = 400;
         var randY = me.game.viewport.height / 2 - (this.getRandomInt(minY, maxY));
-        this.middleLane = (me.game.viewport.width / 2 - this.playerSettings.image.width / 2);
+        this.middleLane = (me.game.viewport.width / 2 - this.playerSettings.image.width / 4);
         this.leftLane = this.middleLane - offset;
         this.rightLane = this.middleLane + offset;
 
@@ -95,6 +94,7 @@
             }
             if (speedModifier > 1) {
                 game.data.scrollingSpeed += speedModifier;
+                console.log(scrollingSpeed);
             }
             if (defaultSpeed != game.data.scrollingSpeed) {
                 game.data.scrollingSpeed = defaultSpeed;
