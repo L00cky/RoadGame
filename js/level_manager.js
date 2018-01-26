@@ -73,7 +73,8 @@
         this.startingObstacles = game.data.maxObstacles;
 
         // Adding grass
-        this.fillGrass(3);
+        this.fillGrass(2, 5);
+        this.grassArrayLenth = this.grassBG.length;
 
         this.updateChildBounds();
     },
@@ -94,7 +95,6 @@
             }
             if (speedModifier > 1) {
                 game.data.scrollingSpeed += speedModifier;
-                console.log(scrollingSpeed);
             }
             if (defaultSpeed != game.data.scrollingSpeed) {
                 game.data.scrollingSpeed = defaultSpeed;
@@ -105,6 +105,10 @@
             game.data.gameOver = true;
             game.data.gameStarted = false;
         }
+
+        //if (this.grassArrayLenth != this.grassBG.length) {
+        //    this.fillGrass(2, 1);
+        //}
 
         this.updateChildBounds();
         return true;
@@ -119,16 +123,16 @@
         this.obstacles.push(this.addChild(me.pool.pull("obstacle", 0, this.player.pos.y, this.obstacleSettings), this.roadObstacleLayer));
         game.data.currentObstacles += 2;
     },
-    fillGrass: function (grassColumns) {
+    fillGrass: function (grassColumns, grassRows) {
         //Right side of the road
-        for (var j = 0; j < me.game.viewport.height / this.grassSettings.image.height + 1; j++) {
+        for (var j = 0; j < grassRows; j++) {
             for (var i = 0; i < grassColumns; i++) {
                 this.grassBG.push(this.addChild(me.pool.pull("grass", (this.middleX + this.roadGrassOffset) + i * this.grassSettings.image.width, j * this.grassSettings.image.height, this.grassSettings), this.bgLayer));
             }
         }
 
         // Left side of the road
-        for (var j = 0; j < me.game.viewport.height / this.grassSettings.image.height + 1; j++) {
+        for (var j = 0; j < grassRows; j++) {
             for (var i = 0; i < grassColumns; i++) {
                 this.grassBG.push(this.addChild(me.pool.pull("grass", (this.middleX - this.roadGrassOffset) - i * this.grassSettings.image.width, j * this.grassSettings.image.height, this.grassSettings), this.bgLayer));
             }

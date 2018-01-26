@@ -33,8 +33,7 @@ game.HUD.Health = me.Sprite.extend({
             image: image
         }]);
         this.anchorPoint = new me.Vector2d(0, 0);
-    }
-    ,
+    },
     update: function () {
         var container = this.ancestor;
         if (container.hp != game.data.life) {
