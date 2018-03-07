@@ -106,10 +106,6 @@
             game.data.gameStarted = false;
         }
 
-        //if (this.grassArrayLenth != this.grassBG.length) {
-        //    this.fillGrass(2, 1);
-        //}
-
         this.updateChildBounds();
         return true;
     },

@@ -1,7 +1,7 @@
 ﻿game.Grass = me.Sprite.extend({
     init: function (x, y, settings) {
         var newX = x - settings.image.width / 2;
-        var images = [];
+        this.images = [];
         //if (newX === 404.5 || newX === 560.5 || newX === 79.5) {
         //    images = ["grass_0", "grass_1"]
         //    //if (newX === 560.5) {
@@ -17,20 +17,20 @@
         //}
         console.log(newX);
         if (newX === 404.5 || newX === 79.5) {
-            images = ["grass_0", "grass_1"];
+            this.images = ["grass_0", "grass_1"];
             if (newX === 79.5) {
-                images.push("grass_4", "grass_5");
+                this.images.push("grass_4", "grass_5");
             }
         }
 
         if (newX === 482.5 || newX === 157.5) {
-            images = ["grass_2", "grass_3"];
+            this.images = ["grass_2", "grass_3"];
             if (newX === 482.5) {
-                images.push("grass_6", "grass_7");
+                this.images.push("grass_6", "grass_7");
             }
         }
 
-        var randomImage = me.loader.getImage(images[this.getRandomInt(0, images.length)]);
+        var randomImage = me.loader.getImage(this.images[this.getRandomInt(0, this.images.length)]);
 
         this._super(me.Sprite, "init", [newX, y,
             {
@@ -50,18 +50,9 @@
 
         if (this.pos.y >= me.game.viewport.height) {
             this.pos.y -= 5 * 154;
+            var randomImage = me.loader.getImage(this.images[this.getRandomInt(0, this.images.length)]);
+            this.image = randomImage;
         }
-
-        //if (this.pos.y > me.game.viewport.height) {
-        //    var container = this.ancestor;
-        //    var body = this.body;
-
-        //    container.removeChildNow(this, false);
-        //    var index = container.grassBG.indexOf(this);
-        //    container.grassBG.splice(index, 1);
-
-        //    return false;
-        //}
 
         return true;
     },
