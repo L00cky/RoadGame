@@ -15,7 +15,6 @@
         //    //    images.push("grass_4", "grass_5");
         //    //}
         //}
-        console.log(newX);
         if (newX === 404.5 || newX === 79.5) {
             this.images = ["grass_0", "grass_1"];
             if (newX === 79.5) {

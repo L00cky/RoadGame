@@ -101,7 +101,7 @@
             }
         }
 
-        if (game.data.life == 0) {
+        if (game.data.life <= 0) {
             game.data.gameOver = true;
             game.data.gameStarted = false;
         }
