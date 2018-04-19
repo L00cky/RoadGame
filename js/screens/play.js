@@ -24,15 +24,15 @@ game.PlayScreen = me.ScreenObject.extend({
             }
         } else {
             console.log("Device type is: PC");
-
-            // Bind keys
-            me.input.bindKey(me.input.KEY.LEFT, "left", true);
-            me.input.bindKey(me.input.KEY.RIGHT, "right", true);
-            me.input.bindKey(me.input.KEY.A, "left", true);
-            me.input.bindKey(me.input.KEY.D, "right", true)
-
-            me.input.bindKey(me.input.KEY.SPACE, "start");
         }
+
+        // Bind keys
+        me.input.bindKey(me.input.KEY.LEFT, "left", true);
+        me.input.bindKey(me.input.KEY.RIGHT, "right", true);
+        me.input.bindKey(me.input.KEY.A, "left", true);
+        me.input.bindKey(me.input.KEY.D, "right", true)
+
+        me.input.bindKey(me.input.KEY.SPACE, "start");
 
         //me.input.registerPointerEvent("pointerdown", me.game.viewport, function (event) {
         //    me.event.publish("pointerdown", [event]);
