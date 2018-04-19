@@ -13,7 +13,7 @@
         ]);
         this.name = 'player';
         this.body.collisionType = me.collision.types.PLAYER_OBJECT;
-        this.body.setCollisionMask(me.collision.types.ENEMY_OBJECT);
+        this.body.setCollisionMask(me.collision.types.ENEMY_OBJECT | me.collision.types.WORLD_SHAPE);
         this.body.gravity = 0;
         this.body.setVelocity(0, 0);
 
@@ -75,7 +75,7 @@
         return true;
     },
     onCollision: function (res, other) {
-        if (other.body.collisionType === me.collision.types.ENEMY_OBJECT) {
+        if (other.body.collisionType === me.collision.types.ENEMY_OBJECT || other.body.collisionType === me.collision.types.WORLD_SHAPE) {
             var container = this.ancestor;
             var body = this.body;
 
@@ -86,10 +86,9 @@
             game.data.currentObstacles--;
             
             this.renderable.flicker(2000, function () {
-                body.setCollisionMask(me.collision.types.ENEMY_OBJECT);
+                body.setCollisionMask(me.collision.types.ENEMY_OBJECT | me.collision.types.WORLD_SHAPE);
             }.bind(this));
             game.data.life--;
-            console.log(game.data.life);
             return false;
         }
     }

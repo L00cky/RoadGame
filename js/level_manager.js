@@ -25,6 +25,7 @@
         this.middleX = me.game.viewport.width / 2;
         this.middleY = me.game.viewport.height / 2;
 
+        // Spawn player
         this.player = me.pool.pull("player", (me.game.viewport.width / 2 - this.playerSettings.image.width / 4), me.game.viewport.height / 2 + 50, this.playerSettings);
 
         var offset = 50;
@@ -86,22 +87,24 @@
         }
 
         if (game.data.gameStarted && !game.data.gameOver) {
+            // + 1 score every second
             game.data.score += 1 * (dt / 1000);
             var defaultSpeed = game.data.scrollingSpeed;
-            var speedModifier = game.data.score / 100;
+            var speedModifier = game.data.score / 10;
             var difficultyModifier = this.startingObstacles + Math.floor(game.data.score / 20);
             if (difficultyModifier > 0) {
                 game.data.maxObstacles = difficultyModifier;
             }
             if (speedModifier > 1) {
-                game.data.scrollingSpeed += speedModifier;
+                game.data.scrollingSpeed = game.data.scrollingSpeed * 1.2;
+                speedModifier = 0;
+                console.log('Scrolling speed:', game.data.scrollingSpeed);
             }
-            if (defaultSpeed != game.data.scrollingSpeed) {
-                game.data.scrollingSpeed = defaultSpeed;
-            }
+
+            console.log(game.data.score);
         }
 
-        if (game.data.life == 0) {
+        if (game.data.life <= 0) {
             game.data.gameOver = true;
             game.data.gameStarted = false;
         }

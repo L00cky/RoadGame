@@ -20,7 +20,7 @@
 
         this.name = 'obstacle';
 
-        this.body.collisionType = me.collision.types.ENEMY_OBJECT;
+        this.body.collisionType = me.collision.types.WORLD_SHAPE;
         this.body.gravity = 0;
 
         this.leftLane = middlePosition - offset;

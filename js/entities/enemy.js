@@ -21,6 +21,7 @@
         this.name = 'obstacle_car';
 
         this.body.collisionType = me.collision.types.ENEMY_OBJECT;
+        this.body.setCollisionMask(me.collision.types.WORLD_SHAPE | me.collision.types.PLAYER_OBJECT);
         this.body.gravity = 0;
         this.body.setVelocity(0, 0);
 
@@ -29,7 +30,7 @@
         this.middleLane = middlePosition;
         this.currentLane = Math.floor(Math.random() * 3);
         this.alwaysUpdate = true;
-        this.speed = 200;
+        this.speed = this.getRandomInt(200, 250);
     },
     update: function (time) {
         this._super(me.Entity, "update", [time]);
@@ -47,6 +48,12 @@
                 break;
             case 2:
                 this.pos.x = this.rightLane;
+                break;
+            case -1:
+                this.currentLane = 2;
+                break;
+            case 3:
+                this.currentLane = 0;
                 break;
         }
 
@@ -68,5 +75,12 @@
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+    },
+    onCollision: function (res, other) {
+        // On collision with obstacle
+        if (other.body.collisionType === me.collision.types.WORLD_SHAPE) {
+            this.currentLane--;
+            return false;
+        }        
     }
 });

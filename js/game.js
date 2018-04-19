@@ -23,16 +23,18 @@ var game = {
         // Initialize the audio.
         me.audio.init("mp3,ogg");
 
-        // set and load all resources.
+        // Set and load all resources.
         // (this will also automatically switch to the loading screen)
         me.loader.preload(game.resources, this.loaded.bind(this));
     },
 
     // Run on game resources loaded.
     "loaded": function () {
+
+        // Set the play state
         me.state.set(me.state.PLAY, new game.PlayScreen());
 
-        // add our player entity in the entity pool
+        // Add entities to the pool
         me.pool.register("player", game.Player);
         me.pool.register("road", game.Road);
         me.pool.register("grass", game.Grass);
