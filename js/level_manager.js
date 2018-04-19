@@ -93,7 +93,7 @@
             var speedModifier = game.data.score / 10;
             var difficultyModifier = this.startingObstacles + Math.floor(game.data.score / 20);
 
-            console.log(game.data.score);
+            //console.log(game.data.score);
         }
 
         if (game.data.life <= 0) {

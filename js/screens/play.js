@@ -34,14 +34,23 @@ game.PlayScreen = me.ScreenObject.extend({
             me.input.bindKey(me.input.KEY.SPACE, "start");
         }
 
+        //me.input.registerPointerEvent("pointerdown", me.game.viewport, function (event) {
+        //    me.event.publish("pointerdown", [event]);
+        //    console.log("pointerdown registered");
+        //    me.input.triggerKeyEvent(me.input.KEY.SPACE, true);
+        //    me.input.releasePointerEvent('pointerdown', this);
+        //    return false;
+        //});
+
+        var leftRect = new me.Rect(-1 * (me.game.viewport.width / 2), -1 * (me.game.viewport.height / 2), me.game.viewport.width / 2, me.game.viewport.height);
         me.input.registerPointerEvent("pointerdown", me.game.viewport, function (event) {
             me.event.publish("pointerdown", [event]);
-            console.log("pointerdown registered");
-            game.data.gameStarted = true;
-        });
-        me.input.registerPointerEvent("pointerdown", new Rect(-1 * me.game.viewport.x / 2, -1 * me.game.viewport.y / 2, me.game.viewport.x / 2, me.game.viewport.y), function (event) {
-            me.event.publish("pointerdown", [event]);
-            me.input.triggerKeyEvent(me.input.KEY.LEFT, true);
+            console.log("pointerdown registered, go left");
+            if (game.data.gameStarted) {
+                me.input.triggerKeyEvent(me.input.KEY.LEFT, true);
+            } else {
+                me.input.triggerKeyEvent(me.input.KEY.SPACE, true);
+            }
         });
     },
 
