@@ -22,15 +22,6 @@ game.PlayScreen = me.ScreenObject.extend({
             } else if (me.device.iOS) {
                 console.log("Device type is: iOS");
             }
-
-            me.input.registerPointerEvent("pointerdown", me.game.viewport, function (event) {
-                me.event.publish("pointerdown", [event]);
-                console.log("pointerdown registered");
-                game.data.gameStarted = true;
-            });
-            me.input.registerPointerEvent("pointerdown", new Rect(-1 * me.game.viewport.x / 2, -1 * me.game.viewport.y / 2, me.game.viewport.x / 2, me.game.viewport.y), function (event) {
-                me.event.publish("pointerdown", [event]);
-            });
         } else {
             console.log("Device type is: PC");
 
@@ -42,6 +33,16 @@ game.PlayScreen = me.ScreenObject.extend({
 
             me.input.bindKey(me.input.KEY.SPACE, "start");
         }
+
+        me.input.registerPointerEvent("pointerdown", me.game.viewport, function (event) {
+            me.event.publish("pointerdown", [event]);
+            console.log("pointerdown registered");
+            game.data.gameStarted = true;
+        });
+        me.input.registerPointerEvent("pointerdown", new Rect(-1 * me.game.viewport.x / 2, -1 * me.game.viewport.y / 2, me.game.viewport.x / 2, me.game.viewport.y), function (event) {
+            me.event.publish("pointerdown", [event]);
+            me.input.triggerKeyEvent(me.input.KEY.LEFT, true);
+        });
     },
 
     // On leaving screen
