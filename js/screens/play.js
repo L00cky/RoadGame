@@ -36,6 +36,7 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.registerPointerEvent("pointerdown", me.game.viewport, function (event) {
             me.event.publish("pointerdown", [event]);
             console.log("pointerdown registered");
+            game.data.gameStarted = true;
         });
     },
 
