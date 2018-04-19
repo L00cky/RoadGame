@@ -92,14 +92,6 @@
             var defaultSpeed = game.data.scrollingSpeed;
             var speedModifier = game.data.score / 10;
             var difficultyModifier = this.startingObstacles + Math.floor(game.data.score / 20);
-            if (difficultyModifier > 0) {
-                game.data.maxObstacles = difficultyModifier;
-            }
-            if (speedModifier > 1) {
-                game.data.scrollingSpeed = game.data.scrollingSpeed * 1.2;
-                speedModifier = 0;
-                console.log('Scrolling speed:', game.data.scrollingSpeed);
-            }
 
             console.log(game.data.score);
         }
